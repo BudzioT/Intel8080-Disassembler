@@ -7,7 +7,7 @@ int disassembler(unsigned char* buffer, int pc)
 {
     unsigned char* code = &buffer[pc];
     int opBytes = 1;
-    printf("0x%04x", pc);
+    printf("0x%04x\t", pc);
 
     switch (*code) {
         case 0x00:
@@ -813,6 +813,9 @@ int disassembler(unsigned char* buffer, int pc)
             break;
         case 0xFF:
             printf("RST\t7");
+            break;
+        default:
+            printf("UNK, 0x%02x", *code);
             break;
     }
 

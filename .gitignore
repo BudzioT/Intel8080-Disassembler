@@ -12,5 +12,5 @@ _deps
 
 cmake-build-debug/
 CMakeLists.txt
-main.cpp
 .idea/
+ROMS/
