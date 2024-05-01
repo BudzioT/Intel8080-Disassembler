@@ -8,19 +8,19 @@ int main() {
     std::string path;
     std::cin >> path;
 
-    std::ifstream file(path);
-    if (!file.is_open()) {
+    FILE* file = fopen(path.c_str(), "rb");
+    if (!file) {
         std::cerr << "Error: file not found" << std::endl;
         return 1;
     }
 
-    file.seekg(0, std::ios::end);
-    int size = static_cast<int>(file.tellg());
+    fseek(file, 0, SEEK_END);
+    int size = ftell(file);
     unsigned char* buffer = new unsigned char[size];
-    file.seekg(0, std::ios::beg);
+    fseek(file, 0, SEEK_SET);
 
-    file.read(reinterpret_cast<char*>(buffer), size);
-    file.close();
+    fread(buffer, size, 1, file); // read the entire file into the buffer
+    fclose(file);
 
     int pc = 0;
     while (pc < size)
